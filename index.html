@@ -1,0 +1,145 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+        integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+    <title>FoodMartz Calculator!</title>
+    <style>
+        body {
+            background-color: #fba832;
+        }
+
+        button {
+            background-color: #3D5F3c !important;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="row">
+            <div class="col">
+                <div class="text-center">
+                    <img src="./Fm.png" class="img img-fluid" style="height: 100px;" alt="">
+                </div>
+                <h3 class="mt-3">FoodMartz Redeem Points Calculator</h3>
+
+                <form>
+                    <div class="form-group">
+                        <label for="customerPurchase">Total Customer Puchase Amount</label>
+                        <input type="number" class="form-control" id="customerPurchase" aria-describedby="emailHelp"
+                            placeholder="Total Customer Puchase Amount">
+                    </div>
+                    <div class="form-group">
+                        <label for="incomePerH">Income per 100</label>
+                        <input type="number" class="form-control" id="incomePerH" aria-describedby="emailHelp"
+                            placeholder="FoodMartz income per 100">
+                    </div>
+                    <div class="form-group">
+                        <label for="shareToCustomers">Share to Customer per 100</label>
+                        <input type="number" class="form-control" id="shareToCustomers" aria-describedby="emailHelp"
+                            placeholder="Share to Customers">
+                    </div>
+                    <div class="form-group">
+                        <label for="redeemPoints">Redeem Point per Rupee</label>
+                        <input type="number" class="form-control" id="redeemPoints" aria-describedby="emailHelp"
+                            placeholder="Redeem Point Value per Rupee">
+                    </div>
+                    <button type="button" class="btn btn-secondary btn-block">Calculate</button>
+
+                </form>
+                <table class="table d-none" id="finalResultTable">
+                    <tbody>
+                        <tr>
+                            <th scope="row">1</th>
+                            <td>Purchase Amount</td>
+                            <td id="purchaseAmountTable">Fill</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">2</th>
+                            <td>Our Left Over</td>
+                            <td id="ourLeftOverTable">The</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">3</th>
+                            <td>Amount to Customer</td>
+                            <td id="amountToCustomerTable">Form</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">4</th>
+                            <td>Points to Customer</td>
+                            <td id="pointsToCustomerTable">Correctly</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <h3 class="d-none" id="errorMessage">Fill all the fields</h3>
+            </div>
+        </div>
+    </div>
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+        integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+        integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+        crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+        integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"
+        integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script>
+        $(document).ready(function () {
+            //On Button Click
+            $("button").click(function () {
+                //Get The Values From Users
+                var customerPurchase = $('#customerPurchase').val();
+                var incomePer100 = $('#incomePerH').val();
+                var shareToCustomers = $('#shareToCustomers').val();
+                var redeemPoints = $('#redeemPoints').val();
+
+
+
+                //Calculations
+                //  Customer Amount
+                var customerProfitAmount = (shareToCustomers * customerPurchase) / 100
+                // alert(customerProfitAmount)
+
+                //  Income Amount
+                var ourIncomeAmount = (incomePer100 * customerPurchase) / 100
+                // alert(ourIncomeAmount)
+
+                // Total Profit
+                var totalProfit = ourIncomeAmount - customerProfitAmount
+                // alert(totalProfit)
+
+                // Redeem Point cal
+                var customerRedeemPoints = redeemPoints * customerProfitAmount
+
+                $('#purchaseAmountTable').text("₹ " + customerPurchase);
+                $('#ourLeftOverTable').text("₹ " + totalProfit);
+                $('#amountToCustomerTable').text("₹ " + customerProfitAmount);
+                $('#pointsToCustomerTable').text("Pts " + customerRedeemPoints);
+
+                $("#finalResultTable").removeClass("d-none");
+
+            });
+        });
+
+
+        //Display
+    </script>
+</body>
+
+</html>
